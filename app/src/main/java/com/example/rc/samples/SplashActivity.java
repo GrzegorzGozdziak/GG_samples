@@ -8,19 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    public static final String TOKEN = "token";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().remove(AppConfig.TOKEN).commit();
 //        prefs
 //                .edit()
 //                .putString(TOKEN, "jakiś token")
 //                .commit();
         Intent intent = null;
-        if(!prefs.contains(TOKEN)){
+        if(prefs.contains(AppConfig.TOKEN)){
             intent = new Intent(this, MainActivity.class);
 
         } else {
