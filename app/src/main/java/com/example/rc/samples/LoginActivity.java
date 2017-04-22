@@ -1,5 +1,6 @@
 package com.example.rc.samples;
 
+import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -46,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    showConnectionProblemsAlert();
+                    showValidationProblemsAlert();
                 }
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             }
         }
                 .execute(new LoginModel(email.getText().toString(), password.getText().toString()));
@@ -67,6 +68,22 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 })
                 .setPositiveButton("Rozumiem", null)
+                .show();
+    }
+
+    private void showValidationProblemsAlert() {
+        new AlertDialog.Builder(this)
+                .setTitle("Wrong data")
+                .setMessage("Probably U dont know entrance data...")
+                .setCancelable(true)
+                .setNegativeButton("Try again", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                    }
+                })
+                .setPositiveButton("I see", null)
                 .show();
     }
 }
